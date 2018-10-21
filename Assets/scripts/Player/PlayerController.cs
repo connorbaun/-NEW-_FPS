@@ -90,9 +90,9 @@ public class PlayerController : MonoBehaviour {
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //RIGHT ANALOG STICK:
-            //if the player pushes left or right on the right analog stick, store it in a float called _xLook. It will return either -1 0 or 1
+            //if the player pushes left or right on the right analog stick, store it in a float called _yRot. It will return either -1 0 or 1
             float _yRot = Input.GetAxisRaw("RSHorizontal") * horizontalLookSensitivity; //multipies our l/r input by the sensitivity
-            LRrotation += _yRot; //stores the "change" in Left/Right rotation since last frame
+            LRrotation += _yRot; //stores the "change" in Left/Right rotation since last frame. it grows/shrinks with each movement of RS
        
         
 
@@ -105,8 +105,8 @@ public class PlayerController : MonoBehaviour {
 
             //if the player pushes up or down on the right analog stick, store it in a float called _xRot. It will return either -1 0 or 1
             float _xRot = Input.GetAxisRaw("RSVertical") * verticalLookSensitivity;
-            UDrotation += _xRot; //stores the "change" in Up/Down rotation of camera since last frame
-            UDrotation = Mathf.Clamp(UDrotation, -70, 70); //makes sure that we can't look all the way up or down
+            UDrotation += _xRot; //stores the "change" in Up/Down rotation of camera since last frame. it grows/changes with each movement of RS
+            UDrotation = Mathf.Clamp(UDrotation, -70, 70); //makes sure that we can't look all the way up or down (flip over our own heads)
             //Debug.Log(UDrotation);
 
             motor.CollectRotationFromPlayerController(LRrotation,UDrotation); //we are calling the CollectRotation function inside PlayerMotor and we are inputing the _rotation variable we calculated.
@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Shoot"))
             {
                 shoot.Fire();
+            //Debug.Log("shot.");
             }
 
 
@@ -143,7 +144,7 @@ public class PlayerController : MonoBehaviour {
             }
 
             //Toss Code
-            if (Input.GetButtonDown("Throw"))
+             if (Input.GetButtonDown("Throw"))
             {
                 equip.ThrowCurrentWeapon();
             }

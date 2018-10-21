@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1063209032623200
 GameObject:
   m_ObjectHideFlags: 1
@@ -1716,10 +1716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc27e388bf84bfe4e93bdbe7170fb438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipAmmo: 0
-  pocketAmmo: 0
+  clipAmmo: 8
+  pocketAmmo: 60
   gunName: 
-  model: {fileID: 0}
+  model: {fileID: 1033834153174500}
   magnumModel: {fileID: 1033834153174500}
   smgModel: {fileID: 1750923495427362}
   brModel: {fileID: 1832411810075286}

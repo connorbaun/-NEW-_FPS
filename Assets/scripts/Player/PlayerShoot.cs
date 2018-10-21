@@ -53,7 +53,13 @@ public class PlayerShoot : MonoBehaviour
 
 
 
-        currWeapUI.text = "Current: " + myCurrentGun.name + " / " +  myNextGun.name;
+        currWeapUI.text = "EQUIPPED: " + myCurrentGun.name + " || " + myNextGun.name;
+
+        if (myCurrentGun == equip.empty && myNextGun != equip.empty)
+        {
+            ammoUI.text = " (Empty) " + " ( " + myNextGun.currentClip.ToString()  +  " | " + myNextGun.currentAmmo.ToString() + " ) ";
+        }
+
         
 
         //Debug.Log("we have out " + myCurrentGun.name + " and " + myNextGun.name + " secondary");
@@ -104,14 +110,16 @@ public class PlayerShoot : MonoBehaviour
         {
             //Debug.Log(other.GetComponent<Pickup>().gunType.name);
             interactUI.text = "Hold R1 to pickup a " + other.GetComponent<Pickup>().gunType.name + " ( " + other.GetComponent<Pickup>().clipAmmo + " | " + other.GetComponent<Pickup>().pocketAmmo + " ) ";
+
+            if (Input.GetButtonDown("Pickup"))
+            {
+                //Debug.Log("We should have taken this gun");
+                equip.PickupGun(other.GetComponent<Pickup>().gunType, other.GetComponent<Pickup>().clipAmmo, other.GetComponent<Pickup>().pocketAmmo);
+                other.GetComponent<Pickup>().RemoveFromMap();
+                interactUI.text = "";
+            }
         }
-        if (Input.GetButtonDown("Pickup"))
-        {
-            Debug.Log("We should have taken this gun");
-            equip.PickupGun(other.GetComponent<Pickup>().gunType, other.GetComponent<Pickup>().clipAmmo, other.GetComponent<Pickup>().pocketAmmo);
-            other.GetComponent<Pickup>().RemoveFromMap();
-            interactUI.text = "";
-        }
+
     }
 
     private void OnTriggerExit(Collider other)
