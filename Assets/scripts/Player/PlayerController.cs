@@ -51,10 +51,10 @@ public class PlayerController : MonoBehaviour {
 
             // LEFT ANALOG STICK:
             //if the player pushes left or right on the left analog stick, store it in a float called _xMov. _xMov will be either -1 0 or 1
-            float _xMov = Input.GetAxisRaw("LSHorizontal");
+            float _xMov = Input.GetAxisRaw(myPlayerNum+ "LSHorizontal");
 
             //if the player pushes forwards or backwards on the left analog stick, store it in a float called _zMov. _zMov will be either -1 0 or 1
-            float _zMov = Input.GetAxisRaw("LSVertical");
+            float _zMov = Input.GetAxisRaw(myPlayerNum+"LSVertical");
         
             //we now need to take that input data for the left stick and do something with it to make it affect the player object's forward/backward and horizontal movement (strafe/walk):       
     
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 
         //RIGHT ANALOG STICK:
             //if the player pushes left or right on the right analog stick, store it in a float called _yRot. It will return either -1 0 or 1
-            float _yRot = Input.GetAxisRaw("RSHorizontal") * horizontalLookSensitivity; //multipies our l/r input by the sensitivity
+            float _yRot = Input.GetAxisRaw(myPlayerNum + "RSHorizontal") * horizontalLookSensitivity; //multipies our l/r input by the sensitivity
             LRrotation += _yRot; //stores the "change" in Left/Right rotation since last frame. it grows/shrinks with each movement of RS
        
         
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 
 
             //if the player pushes up or down on the right analog stick, store it in a float called _xRot. It will return either -1 0 or 1
-            float _xRot = Input.GetAxisRaw("RSVertical") * verticalLookSensitivity;
+            float _xRot = Input.GetAxisRaw(myPlayerNum + "RSVertical") * verticalLookSensitivity;
             UDrotation += _xRot; //stores the "change" in Up/Down rotation of camera since last frame. it grows/changes with each movement of RS
             UDrotation = Mathf.Clamp(UDrotation, -70, 70); //makes sure that we can't look all the way up or down (flip over our own heads)
             //Debug.Log(UDrotation);
@@ -119,18 +119,18 @@ public class PlayerController : MonoBehaviour {
 
 
         //Jump Code
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown(myPlayerNum + "Jump"))
             {
                 motor.CollectJumpForceFromPlayerController(_jumpForce, _doubleJumpForce);
             }
 
             //Cycle Weapons Code
-            if (Input.GetButtonDown("Switch"))
+            if (Input.GetButtonDown(myPlayerNum + "Switch"))
             {
                 GetComponent<Equipment>().CycleEquipment();
             }
             //Fire Code
-            if (Input.GetButtonDown("Shoot"))
+            if (Input.GetButtonDown(myPlayerNum + "Shoot"))
             {
                 shoot.Fire();
             //Debug.Log("shot.");
@@ -138,13 +138,13 @@ public class PlayerController : MonoBehaviour {
 
 
             //Reload Code
-            if (Input.GetButtonDown("Reload"))
+            if (Input.GetButtonDown(myPlayerNum + "Reload"))
             {
                 shoot.Reload();
             }
 
             //Toss Code
-             if (Input.GetButtonDown("Throw"))
+             if (Input.GetButtonDown(myPlayerNum + "Throw"))
             {
                 equip.ThrowCurrentWeapon();
             }

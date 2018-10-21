@@ -9,6 +9,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject bulletSpawner;
 
     private Equipment equip;
+    private PlayerController controller;
 
     private Gun myCurrentGun;
     private Gun myNextGun;
@@ -19,10 +20,14 @@ public class PlayerShoot : MonoBehaviour
     public Text currWeapUI;
     public ParticleSystem muzzleFlash; //a ref to the muzzleflash of the weapon
 
+    public int myPlayernum;
+
     // Use this for initialization
     void Start()
     {
         equip = GetComponent<Equipment>();
+        controller = GetComponent<PlayerController>();
+        myPlayernum = controller.myPlayerNum;
     }
 
     // Update is called once per frame
@@ -69,9 +74,9 @@ public class PlayerShoot : MonoBehaviour
     {
         if (myCurrentGun.name == "M7 Carbine")
         {
-            if (Input.GetButton("Shoot"))
+            if (Input.GetButton(myPlayernum + "Shoot"))
             {
-                Invoke("Fire", .1f);
+                Invoke("Fire", .125f);
             }
         }
 
@@ -111,7 +116,7 @@ public class PlayerShoot : MonoBehaviour
             //Debug.Log(other.GetComponent<Pickup>().gunType.name);
             interactUI.text = "Hold R1 to pickup a " + other.GetComponent<Pickup>().gunType.name + " ( " + other.GetComponent<Pickup>().clipAmmo + " | " + other.GetComponent<Pickup>().pocketAmmo + " ) ";
 
-            if (Input.GetButtonDown("Pickup"))
+            if (Input.GetButtonDown(myPlayernum + "Pickup"))
             {
                 //Debug.Log("We should have taken this gun");
                 equip.PickupGun(other.GetComponent<Pickup>().gunType, other.GetComponent<Pickup>().clipAmmo, other.GetComponent<Pickup>().pocketAmmo);

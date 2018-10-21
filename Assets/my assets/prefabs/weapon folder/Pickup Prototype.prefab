@@ -1722,7 +1722,12 @@ MonoBehaviour:
   model: {fileID: 1033834153174500}
   magnumModel: {fileID: 1033834153174500}
   smgModel: {fileID: 1750923495427362}
-  brModel: {fileID: 1832411810075286}
+  brModel: {fileID: 1765483017170522, guid: ea00c997433aa7048b6d715805ab50bc, type: 2}
+  spawnedOnMap: 0
+  isPistol: 0
+  isSmg: 0
+  isBr: 0
+  allEquip: {fileID: 0}
 --- !u!135 &135596778602583176
 SphereCollider:
   m_ObjectHideFlags: 1

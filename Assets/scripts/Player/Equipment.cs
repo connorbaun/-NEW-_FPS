@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour {
     //this is the currently equipped weapons. maybe an array with 2 spaces?
+    //we also "create" each version of weapon we want in this script.
     
     public List<Gun> theGuns = new List<Gun>(); //a new list of all weapons in the game. we will create instances of weapons below
 
-    public Gun pistol = new Gun("Magnum", 8, 60, 8, 60, 20, 50, 30000); //new weapon
-    public Gun smg = new Gun("M7 Carbine",  60, 300, 60, 240, 8, 8, 20000); //new weapon
-    public Gun br = new Gun("BHR55 Battle Rifle",   36, 10, 36, 360, 4, 7, 30000); //new weapon
+    public Gun pistol = new Gun("Magnum", 12, 60, 12, 60, 20, 50, 60000); //new weapon
+    public Gun smg = new Gun("M7 Carbine",  60, 300, 60, 240, 8, 8, 60000); //new weapon
+    public Gun br = new Gun("BHR55 Battle Rifle",   36, 10, 36, 360, 4, 7, 100000); //new weapon
     public Gun empty = new Gun("     ", 0, 0, 0, 0, 0, 0, 0);
 
     public Gun currentGun; //the gun that is onscreen right this instant

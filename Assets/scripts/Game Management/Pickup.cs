@@ -28,20 +28,20 @@ public class Pickup : MonoBehaviour {
             if (isPistol)
             {
                 gunType = allEquip.pistol;
-                clipAmmo = 8;
-                pocketAmmo = 24;
+                clipAmmo = allEquip.pistol.maxClip;
+                pocketAmmo = allEquip.pistol.maxAmmo;
             }
             if (isSmg)
             {
                 gunType = allEquip.smg;
-                clipAmmo = 60;
-                pocketAmmo = 120;
+                clipAmmo = allEquip.smg.maxClip;
+                pocketAmmo = allEquip.smg.maxAmmo;
             }
             if (isBr)
             {
                 gunType = allEquip.br;
-                clipAmmo = 36;
-                pocketAmmo = 75;
+                clipAmmo = allEquip.br.maxClip;
+                pocketAmmo = allEquip.br.maxAmmo;
             }
 
         }
