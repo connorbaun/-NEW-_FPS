@@ -40,8 +40,8 @@ public class Equipment : MonoBehaviour {
         ManageEquipment(); //every frame, makes sure that we are tracking which weapon is current and which is next
 
         //Debug.Log(currentGun.name);
-        Debug.Log(gunIndex);
-        currentGun = equipped[gunIndex];
+        Debug.Log(currentGun.name);
+        //currentGun = equipped[gunIndex];
     }
 
     public void CycleEquipment()
@@ -61,7 +61,7 @@ public class Equipment : MonoBehaviour {
     }
 
     public void PickupGun(Gun type, int clip, int ammo) //collect the attributes of the gun on the floor for our new gun to equip
-    {        
+    {       
             if (gunIndex == 0)//(currentGun == equipped[0]) // if we are currently on gun 0...
             {
                 if (equipped[gunIndex].currentClip > 0 || equipped[gunIndex].currentAmmo > 0)//currentGun.currentClip > 0 || currentGun.currentAmmo > 0) //if we have bullets in this gun
@@ -70,7 +70,7 @@ public class Equipment : MonoBehaviour {
                 }
                     equipped[gunIndex] = type; //make our current gun of type thats on the floor
                     equipped[gunIndex].currentClip = clip; //make our current guns ammo to be equal to the floor gun
-                    equipped[gunIndex].currentAmmo = ammo; //make our current guns pocket to be equal to the floor gun     
+                    equipped[gunIndex].currentAmmo = ammo; //make our current guns pocket to be equal to the floor gun 
             }
             else if (gunIndex == 1)//currentGun == equipped[1]) //if we are currently on gun 1...
             {
@@ -82,8 +82,8 @@ public class Equipment : MonoBehaviour {
                     equipped[gunIndex] = type; //make our current gun type thats on the floor                   
                     equipped[gunIndex].currentClip = type.currentClip; //make our current guns ammo to be equal to the floor gun
                     equipped[gunIndex].currentAmmo = type.currentAmmo; //make our current pocket to be equal to floor guns
-               
-            }     
+
+            }
     }
 
     public void CloneWeapon(float force) //if we are throwing the gun, make sure we have that force applied. if its 0, apply no force 
@@ -219,10 +219,10 @@ public class Equipment : MonoBehaviour {
 
     }
 
-    private void SetStartingEquipment()
+    public void SetStartingEquipment()
     {
-        equipped[0] = br; //sets our currentGun
-        equipped[1] = smg; //sets our nextGun
+        equipped[0] = empty; //sets our currentGun
+        equipped[1] = empty; //sets our nextGun
 
         currentGun = equipped[gunIndex]; //makes sure current gun starts as 0
     }

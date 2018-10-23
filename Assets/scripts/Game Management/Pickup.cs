@@ -47,6 +47,11 @@ public class Pickup : MonoBehaviour {
         }
 	}
 
+    public void Update()
+    {
+
+    }
+
 
 
     public void RemoveFromMap()

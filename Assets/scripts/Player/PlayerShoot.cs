@@ -111,17 +111,70 @@ public class PlayerShoot : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Collider>().tag == "pickup")
+        if (other.GetComponent<Collider>().tag == "pickup") //if you are touching a pickup item...
         {
-            //Debug.Log(other.GetComponent<Pickup>().gunType.name);
-            interactUI.text = "Hold R1 to pickup a " + other.GetComponent<Pickup>().gunType.name + " ( " + other.GetComponent<Pickup>().clipAmmo + " | " + other.GetComponent<Pickup>().pocketAmmo + " ) ";
-
-            if (Input.GetButtonDown(myPlayernum + "Pickup"))
+            if (other.GetComponent<Pickup>().gunName != equip.equipped[0].name) //if the weapon you are touching is not the same type of gun you are holding...
             {
-                //Debug.Log("We should have taken this gun");
-                equip.PickupGun(other.GetComponent<Pickup>().gunType, other.GetComponent<Pickup>().clipAmmo, other.GetComponent<Pickup>().pocketAmmo);
-                other.GetComponent<Pickup>().RemoveFromMap();
-                interactUI.text = "";
+                if (other.GetComponent<Pickup>().gunName != equip.equipped[1].name) //if the weapon we are touching is not the same type of gun you have on back...
+                {
+                    //Debug.Log("Hold R1 to pickup " + other.GetComponent<Pickup>().gunType.name + "|" + other.GetComponent<Pickup>().clipAmmo.ToString() + "|" + other.GetComponent<Pickup>().pocketAmmo.ToString()); //show the gun name and ammo
+                    interactUI.text = "Tap R1 to pickup " + other.GetComponent<Pickup>().gunType.name + " " + "(" + other.GetComponent<Pickup>().clipAmmo.ToString() + "|" + other.GetComponent<Pickup>().pocketAmmo.ToString() + ")";
+                    if (Input.GetButtonDown(myPlayernum + "Pickup"))
+                    {
+                        Debug.Log("Picked up " + other.GetComponent<Pickup>().gunType.name);
+                        equip.PickupGun(other.GetComponent<Pickup>().gunType, other.GetComponent<Pickup>().clipAmmo, other.GetComponent<Pickup>().pocketAmmo);
+                        other.GetComponent<Pickup>().RemoveFromMap();
+                        interactUI.text = " ";
+                    }
+                } 
+
+            }
+            /*if (other.GetComponent<Pickup>().gunType != equip.equipped[equip.gunIndex])
+            {
+                interactUI.text = "Hold R1 to pickup a " + other.GetComponent<Pickup>().gunType.name + " ( " + other.GetComponent<Pickup>().clipAmmo + " | " + other.GetComponent<Pickup>().pocketAmmo + " ) ";
+                if (Input.GetButtonDown(myPlayernum + "Pickup"))
+                {
+                    if (other.GetComponent<Pickup>().gunType != equip.equipped[equip.gunIndex])
+                    {
+                        //Debug.Log("We should have taken this gun");
+                        equip.PickupGun(other.GetComponent<Pickup>().gunType, other.GetComponent<Pickup>().clipAmmo, other.GetComponent<Pickup>().pocketAmmo);
+                        other.GetComponent<Pickup>().RemoveFromMap();
+                        interactUI.text = "";
+                    }
+
+                }
+            } else if (equip.equipped[equip.gunIndex] == other.GetComponent<Pickup>().gunType)
+            {
+                Debug.Log("pickup ammo");
+                //equip.equipped[equip.gunIndex].currentAmmo += other.GetComponent<Pickup>().pocketAmmo;
+                //other.GetComponent<Pickup>().RemoveFromMap();
+            }
+
+            //Debug.Log(other.GetComponent<Pickup>().gunType.name); */
+
+
+
+        }
+
+
+
+
+    }
+
+    private void OnTriggerEnter(Collider other) //right when u enter the sphere trigger of a pickup...
+    {
+        if (other.GetComponent<Collider>().tag == "pickup") //if it is a pickup...
+        {
+            if (other.GetComponent<Pickup>().gunType.name == equip.equipped[0].name) //if the pickup is the same as ur gun 0...
+            {
+                // Debug.Log("picked up " + other.GetComponent<Pickup>().pocketAmmo.ToString() + " rounds for " + other.GetComponent<Pickup>().gunType.name); //tell us we picked up ammo for that gun.
+                interactUI.text = "picked up " + other.GetComponent<Pickup>().pocketAmmo.ToString() + " rounds for " + other.GetComponent<Pickup>().gunType.name;
+            }
+
+            if (other.GetComponent<Pickup>().gunType.name == equip.equipped[1].name) //if the pickup is the same as ur gun 1...
+            {
+                //Debug.Log("picked up " + other.GetComponent<Pickup>().pocketAmmo.ToString() + " rounds for " + other.GetComponent<Pickup>().gunType.name); //tell us we picked up ammo for that gun.
+                interactUI.text = "picked up " + other.GetComponent<Pickup>().pocketAmmo.ToString() + " rounds for " + other.GetComponent<Pickup>().gunType.name;
             }
         }
 
@@ -129,10 +182,18 @@ public class PlayerShoot : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Collider>().tag == "pickup")
+        
+        if (other.GetComponent<Collider>().tag == "pickup") //if it was a pickup...
         {
-            interactUI.text = " ";
-        }
+            if (other.GetComponent<Pickup>().gunName != equip.equipped[0].name) //if the pickup was not our gun 0
+            {
+                if (other.GetComponent<Pickup>().gunName != equip.equipped[1].name) //if the pickup was not our gun 1
+                {
+                    interactUI.text = " "; //then remove onscreen text when we un-touch this pickup
+                }
+            }
+        } 
+        
     }
 
 }

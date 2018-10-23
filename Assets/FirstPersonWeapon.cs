@@ -10,7 +10,7 @@ public class FirstPersonWeapon : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        for (int i = 0; i < fpWeapons.Count - 1; i++) //right away, scan through all gameobjects in this list and...
+        for (int i = 0; i < fpWeapons.Count; i++) //right away, scan through all gameobjects in this list and...
         {
             fpWeapons[i].SetActive(false); //disable them. this way, no weapons are onscreen until the equipment script tells us which one should be there
         }
